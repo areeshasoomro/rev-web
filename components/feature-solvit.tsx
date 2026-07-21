@@ -1,17 +1,15 @@
-
-
 'use client';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import styles from './astro.module.css';
 
 const features = [
-  { id: '01', title: 'Interactive Booking', desc: 'Real-time scheduling with automated confirmations and smart availability management.' },
-  { id: '02', title: 'Service Management', desc: 'Easily manage packages, pricing, and availability across all your services in one place.' },
-  { id: '03', title: 'Customer Dashboard', desc: 'Customers can view history, and reschedule manage all bookings effortlessly.' },
+  { id: '01', title: 'Performance Check', desc: 'Track strengths and weak spots with topic-wise quizzes.' },
+  { id: '02', title: 'Video Lessons', desc: 'Learn complex topics in minutes with expert teachers.' },
+  { id: '03', title: 'Quick Notes', desc: 'Revise faster with concise notes built for exam-day recall.' },
 ];
 
-export default function FeatureStack() {
+export default function FeatureStack_solvit() {
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -26,7 +24,7 @@ export default function FeatureStack() {
     <div className={styles.stackSection}>
       <div className={styles.headerSection}>
         <h2 className={styles.title}>Key Features</h2>
-        <p className={styles.subtitle}>Unlock the power of intelligent automation.</p>
+        <p className={styles.subtitle}>Unlock the power of intelligent learning.</p>
       </div>
 
       <div className={styles.stackContainer} onMouseEnter={() => !isMobile && setIsHovered(true)} onMouseLeave={() => !isMobile && setIsHovered(false)}>
@@ -36,7 +34,7 @@ export default function FeatureStack() {
             className={styles.featureCard}
             animate={{
               x: isMobile ? 0 : (isHovered ? (i - 1) * 440 : 0), 
-              y: isMobile ? i * 370 : (isHovered ? 0 : i * -15), // Stack vertically on mobile
+              y: isMobile ? i * 370 : (isHovered ? 0 : i * -15),
               rotate: isMobile ? 0 : (isHovered ? 0 : i * -2),
               scale: isHovered ? 1 : 1 - (i * 0.05),
             }}

@@ -28,7 +28,7 @@ export default function SolvitVideoPlayer() {
             <div className={styles.videoInner}>
                 <video
                     ref={videoRef}
-                    className={styles.videoElement}
+                    className={styles.videoElement1}
                     muted
                     playsInline
                     src="/solvit.mp4"

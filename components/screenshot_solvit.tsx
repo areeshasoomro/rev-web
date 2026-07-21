@@ -44,7 +44,7 @@ export default function SolvitScreenshotSlider() {
                                 }}
                                 transition={{ type: 'spring', stiffness: 200, damping: 25 }}
                             >
-                                <img src={img} alt="Solvit Project Screenshot" className={styles.slideImage} />
+                                <img src={img} alt="Solvit Project Screenshot" className={styles.slideImage1} />
                             </motion.div>
                         );
                     })}

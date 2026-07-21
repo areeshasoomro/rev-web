@@ -11,6 +11,10 @@ import { FiAlertCircle, FiChevronLeft } from 'react-icons/fi';
 import { Lightbulb } from 'lucide-react';
 import SolvitVideoPlayer from '@/components/Video_solvit';
 import SolvitScreenshotSlider from '@/components/screenshot_solvit';
+import FeatureStack_solvit from '@/components/feature-solvit';
+import Testimonial_solvit from '@/components/solvit-testimonial'; // Import the Solvit-specific testimonial component
+
+
 
 export default function SolvitPage() {
     const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +44,7 @@ export default function SolvitPage() {
                 {/* Dual Brand Logos Row */}
                 <div className={styles.collabLogosRow}>
                     <div className={styles.logoGlowWrapper1}>
-                        <Image src="/loogo.png" alt="Revaya" width={200} height={80} />
+                        <Image src="/loogo.png" alt="Revaya" width={180} height={80} />
                     </div>
                     <span className={styles.collabX}>×</span>
                     <div className={styles.logoGlowWrapper1}>
@@ -123,8 +127,8 @@ export default function SolvitPage() {
             </div>
 
             <SolvitScreenshotSlider />
-            <FeatureStack />
-            <Testimonial />
+            <FeatureStack_solvit />
+            <Testimonial_solvit />
             <CTASection />
         </main>
     );

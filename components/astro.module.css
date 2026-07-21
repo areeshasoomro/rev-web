@@ -574,72 +574,14 @@
 /* ===== VIDEO SECTION FIXES ===== */
 .videoWrapper {
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 700px;
+  margin: 40px auto;
   aspect-ratio: 16 / 9;
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  /* This clips the inner content to the rounded corners */
-
-  /* Create the border using a pseudo-element instead of padding */
   background: linear-gradient(180deg, #1d9bff, #0040e0);
-  box-shadow: 0 0 100px 20px rgba(29, 155, 255, 0.4);
-}
-
-.videoWrapper::before {
-  content: "";
-  position: absolute;
-  top: 50px;
-  /* This creates your border thickness */
-  left: 3px;
-  right: 3px;
-  bottom: 3px;
-  background: #000;
-  /* The black background of your video */
-  border-radius: 21px;
-  /* Slightly tighter radius than wrapper */
-  z-index: 1;
-}
-
-.videoInner {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  right: 3px;
-  bottom: 3px;
-  border-radius: 21px;
-  overflow: hidden;
-  z-index: 2;
-  /* Keeps the video above the background */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.videoElement {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.videoWrapper {
-  width: 100%;
-  max-width: 200px;
-  margin: 0 auto;
-  aspect-ratio: 16 / 9;
-  /* Matches your landscape video */
-
-  /* The Gradient Border */
-  background: linear-gradient(180deg, #1d9bff, #0040e0);
-  padding: 3px;
+  padding: 3px; /* Creates the clean gradient border frame */
   border-radius: 24px;
-
   position: relative;
   overflow: hidden;
-
-  /* This is the key to preventing the "leak" */
-  box-sizing: border-box;
   box-shadow: 0 0 100px 20px rgba(29, 155, 255, 0.4);
 }
 
@@ -647,14 +589,9 @@
   width: 100%;
   height: 100%;
   border-radius: 22px;
-  /* Slightly tighter than the wrapper */
   overflow: hidden;
   background: #000;
-
-  /* Forces the inner box to fill the parent wrapper entirely */
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -663,9 +600,17 @@
 .videoElement {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  /* Fills the black frame completely */
+  object-fit: cover; /* Fills the container cleanly without black bars */
 }
+
+.videoElement1 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fills the container cleanly without black bars */
+}
+
+
+
 
 /* Responsive fix for mobile */
 @media (max-width: 768px) {
@@ -708,26 +653,9 @@
 }
 
 
-.videoWrapper {
-  width: 100%;
-  max-width: 900px;
-  background: linear-gradient(180deg, #1d9bff, #0040e0);
-  padding: 3px;
-  border-radius: 24px;
-  position: relative;
-  /* This creates the 'full glow' effect */
-  box-shadow: 0 0 100px 20px rgba(29, 155, 255, 0.4);
-}
 
-.videoInner {
-  border-radius: 22px;
-  overflow: hidden;
-  background: #000;
-  height: 450px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
+
 
 
 /* Stats Section */
@@ -968,6 +896,11 @@
   height: 100%;
   object-fit: contain;
 }
+.slideImage1 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 .navArrow {
   background: rgba(255, 255, 255, 0.05);
@@ -1188,6 +1121,7 @@
   font-size: 1.2rem;
   font-weight: 800;
   letter-spacing: 0.05rem;
+  text-align: center;
 }
 
 .brandStudio {
@@ -1195,6 +1129,11 @@
   margin-left: 0.3rem;
 }
 
+
+.brandStudio1 {
+  color: #f0ec14f8;
+  margin-left: 0.5rem;
+}
 .authorTitle {
   margin: 0.2rem 0 0 0;
   color: #adb5bd;
