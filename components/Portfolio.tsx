@@ -4,9 +4,9 @@ import Link from 'next/link';
 import styles from './Portfolio.module.css';
 
 const portfolioData = [
-  { id: 1, slug: 'astro-studio', badge: 'Web Development', title: 'Astro Studio', shortDesc: 'A high-performance digital platform.', cardImg: '/astro cover.png' },
-  { id: 2, slug: 'solvit', badge: 'Web Application (LMS)', title: 'Solvit', shortDesc: 'A targeted learning management system.', cardImg: '/solvit cover5.png' },
-  { id: 3, slug: 'rujhan', badge: 'Textile & Production Workflow', title: 'Rujhan', shortDesc: 'Textile production and inventory tracker.', cardImg: '/rujhan cover.png' }, 
+  { id: 1, slug: 'astro-studio', badge: 'Web Development', title: 'Astro Studio', shortDesc: 'A high-performance digital platform.', cardImg: '/astro-cover.png' },
+  { id: 2, slug: 'solvit', badge: 'Web Application (LMS)', title: 'Solvit', shortDesc: 'A targeted learning management system.', cardImg: '/solvit-cover.png' },
+  { id: 3, slug: 'rujhan', badge: 'Textile & Production Workflow', title: 'Rujhan', shortDesc: 'Textile production and inventory tracker.', cardImg: '/rujhan-cover.png' }, 
 ];
 
 export const Portfolio: React.FC = () => {
