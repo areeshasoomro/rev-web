@@ -1,6 +1,9 @@
+
+
+
 // "use client";
 
-// import React, { useState } from 'react';
+// import React, { useState, useEffect } from 'react';
 // import Image from 'next/image';
 // import styles from './ContactSection.module.css';
 
@@ -14,6 +17,24 @@
 //     discovery: ''
 //   });
 
+//   // Inject Calendly script when modal opens
+//   useEffect(() => {
+//     if (isModalOpen) {
+//       const script = document.createElement('script');
+//       script.src = 'https://assets.calendly.com/assets/external/widget.js';
+//       script.async = true;
+//       document.body.appendChild(script);
+      
+//       return () => {
+//         // Clean up script when modal closes
+//         const scriptElement = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+//         if (scriptElement) {
+//           document.body.removeChild(scriptElement);
+//         }
+//       };
+//     }
+//   }, [isModalOpen]);
+
 //   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 //     const { name, value } = e.target;
 //     setFormData(prev => ({ ...prev, [name]: value }));
@@ -21,21 +42,10 @@
 
 //   const handleFormSubmit = (e: React.FormEvent) => {
 //     e.preventDefault();
-    
-//     // Fire pixel-perfect dark theme toast notification
 //     setShowToast(true);
-    
-//     // Flush input fields safely
 //     setFormData({ name: '', email: '', phone: '', discovery: '' });
-    
-//     // Automatic cleanup timeline
-//     setTimeout(() => {
-//       setShowToast(false);
-//     }, 4500);
+//     setTimeout(() => setShowToast(false), 4500);
 //   };
-
-//   const openBookingModal = () => setIsModalOpen(true);
-//   const closeBookingModal = () => setIsModalOpen(false);
 
 //   const whatsappNumber = "+923277862326";
 //   const whatsappMessage = encodeURIComponent("Hello Revaya team! I'd like to discuss a project layout.");
@@ -43,7 +53,6 @@
 
 //   return (
 //     <section id="contact" className={styles.sectionContainer}>
-//       {/* ─── CUSTOM SUCCESS TOAST POPUP ─── */}
 //       {showToast && (
 //         <div className={styles.toastPanel}>
 //           <div className={styles.toastStatusCircle}>
@@ -62,7 +71,6 @@
 //       <div className={styles.mainCardFrame}>
 //         <div className={styles.cardGlowOverlay} />
 
-//         {/* Form Container Side */}
 //         <div className={styles.formSide}>
 //           <h2 className={styles.sectionTitle}>
 //             Get in <span className={styles.blueText}>Touch</span>
@@ -72,85 +80,31 @@
 //           </p>
 
 //           <form onSubmit={handleFormSubmit} className={styles.contactForm}>
-//             <div className={styles.inputWrapper}>
-//               <input 
-//                 type="text" 
-//                 name="name"
-//                 placeholder="Name *" 
-//                 required 
-//                 value={formData.name}
-//                 onChange={handleInputChange}
-//                 className={styles.formInput}
-//               />
-//             </div>
-
-//             <div className={styles.inputWrapper}>
-//               <input 
-//                 type="email" 
-//                 name="email"
-//                 placeholder="Email" 
-//                 value={formData.email}
-//                 onChange={handleInputChange}
-//                 className={styles.formInput}
-//               />
-//             </div>
-
-//             <div className={styles.inputWrapper}>
-//               <input 
-//                 type="tel" 
-//                 name="phone"
-//                 placeholder="Phone number *" 
-//                 required 
-//                 value={formData.phone}
-//                 onChange={handleInputChange}
-//                 className={styles.formInput}
-//               />
-//             </div>
-
-//             <div className={styles.inputWrapper}>
-//               <select 
-//                 name="discovery"
-//                 value={formData.discovery}
-//                 onChange={handleInputChange}
-//                 required
-//                 className={styles.formSelect}
-//               >
-//                 <option value="" disabled hidden>How did you find us?</option>
-//                 <option value="linkedin">LinkedIn</option>
-//                 <option value="google">Google Search</option>
-//                 <option value="recommendation">Word of Mouth / Recommendation</option>
-//                 <option value="other">Other</option>
-//               </select>
-//             </div>
-
-//             {/* Exact Figma Capitalized SEND Button with matching styling */}
-//             <button type="submit" className={styles.submitBtn}>
-//               SEND
-//             </button>
+//             <input type="text" name="name" placeholder="Name *" required value={formData.name} onChange={handleInputChange} className={styles.formInput} />
+//             <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} className={styles.formInput} />
+//             <input type="tel" name="phone" placeholder="Phone number *" required value={formData.phone} onChange={handleInputChange} className={styles.formInput} />
+//             <select name="discovery" value={formData.discovery} onChange={handleInputChange} required className={styles.formSelect}>
+//               <option value="" disabled hidden>How did you find us?</option>
+//               <option value="linkedin">LinkedIn</option>
+//               <option value="google">Google Search</option>
+//               <option value="recommendation">Word of Mouth / Recommendation</option>
+//               <option value="other">Other</option>
+//             </select>
+//             <button type="submit" className={styles.submitBtn}>SEND</button>
 //           </form>
 
-//           {/* Action Row Buttons Layout matching image_17ba40.jpg */}
 //           <div className={styles.actionRowContainer}>
-//             {/* Book a Call with customized phone/down-arrow combo */}
-//             <button type="button" className={styles.bookCallBtn} onClick={openBookingModal}>
+//             <button type="button" className={styles.bookCallBtn} onClick={() => setIsModalOpen(true)}>
 //               Book a Call 
 //               <span className={styles.btnIcon}>
 //                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-//                   {/* Phone Receiver Base Graphic Layer */}
 //                   <path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .3l-2.2 2.2c-2.8-1.4-5.1-3.8-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1-.3-1.1-.5-2.3-.5-3.5 0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1 0 9.4 7.6 17 17 17 .6 0 1-.4 1-1v-3.5c0-.6-.4-1-1-1z" fill="#FF4B4B"/>
-//                   {/* Downward Directional Indicator Arrow overlay */}
 //                   <path d="M12 4v8m0 0l-3-3m3 3l3-3" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
 //                 </svg>
 //               </span>
 //             </button>
 
-//             {/* Transparent Bordered Whatsapp Layout Asset */}
-//             <a 
-//               href={whatsappUrl} 
-//               target="_blank" 
-//               rel="noopener noreferrer" 
-//               className={styles.whatsappLink}
-//             >
+//             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className={styles.whatsappLink}>
 //               Whatsapp Us 
 //               <span className={styles.btnIcon}>
 //                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366">
@@ -161,31 +115,23 @@
 //           </div>
 //         </div>
 
-//         {/* Identity Graphics Asset Panel */}
 //         <div className={styles.logoSide}>
 //           <div className={styles.logoImageContainer}>
-//             <Image 
-//               src="/loogo.png" 
-//               alt="Revaya Logo Layout" 
-//               width={280} 
-//               height={280} 
-//               priority
-//               className={styles.brandLogoAsset}
-//             />
+//             <Image src="/loogo.png" alt="Revaya Logo Layout" width={280} height={280} priority className={styles.brandLogoAsset} />
 //           </div>
 //         </div>
 //       </div>
 
-//       {/* Booking Modal Sheet Window */}
 //       {isModalOpen && (
-//         <div className={styles.modalOverlay} onClick={closeBookingModal}>
-//           <div className={styles.modalBody} onClick={(e) => e.stopPropagation()}>
-//             <button className={styles.modalCloseBtn} onClick={closeBookingModal}>&times;</button>
+//         <div className={styles.modalOverlay} onClick={() => setIsModalOpen(false)}>
+//           <div className={styles.modalBody} style={{ maxWidth: '700px' }} onClick={(e) => e.stopPropagation()}>
+//             <button className={styles.modalCloseBtn} onClick={() => setIsModalOpen(false)}>&times;</button>
 //             <h3 className={styles.modalTitle}>Schedule a Discovery Call</h3>
-//             <p className={styles.modalText}>Select an available calendar allocation for system mapping updates.</p>
-//             <div className={styles.schedulerPlaceholder}>
-//               <p>nahi kiya implement :)</p>
-//             </div>
+//             <div 
+//               className="calendly-inline-widget" 
+//               data-url="https://calendly.com/adamkamani111?hide_landing_page_details=1&hide_gdpr_banner=1" 
+//               style={{ minWidth: '320px', height: '400px', width: '100%' }}
+//             ></div>
 //           </div>
 //         </div>
 //       )}
@@ -320,13 +266,15 @@ export const ContactSection: React.FC = () => {
 
       {isModalOpen && (
         <div className={styles.modalOverlay} onClick={() => setIsModalOpen(false)}>
-          <div className={styles.modalBody} style={{ maxWidth: '700px' }} onClick={(e) => e.stopPropagation()}>
+          <div className={styles.modalBody} onClick={(e) => e.stopPropagation()}>
             <button className={styles.modalCloseBtn} onClick={() => setIsModalOpen(false)}>&times;</button>
             <h3 className={styles.modalTitle}>Schedule a Discovery Call</h3>
+            
+            {/* Calendly Inline Widget Integration */}
             <div 
               className="calendly-inline-widget" 
-              data-url="https://calendly.com/adamkamani111?hide_landing_page_details=1&hide_gdpr_banner=1" 
-              style={{ minWidth: '320px', height: '400px', width: '100%' }}
+              data-url="https://calendly.com/contact-revaya/30min" 
+              style={{ minWidth: '320px', height: '600px', width: '100%' }}
             ></div>
           </div>
         </div>
