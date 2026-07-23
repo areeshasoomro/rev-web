@@ -1,5 +1,8 @@
+
+
+
 // import type { Metadata } from "next";
-// import { Space_Grotesk, Inter } from "next/font/google";
+// import { Space_Grotesk, Manrope } from "next/font/google";
 // import "./globals.css";
 
 // const spaceGrotesk = Space_Grotesk({
@@ -9,9 +12,10 @@
 //   display: "swap",
 // });
 
-// const inter = Inter({
-//   variable: "--font-inter",
+// const manrope = Manrope({
+//   variable: "--font-manrope",
 //   subsets: ["latin"],
+//   weight: ["400", "500", "600", "700"],
 //   display: "swap",
 // });
 
@@ -27,7 +31,7 @@
 //   return (
 //     <html
 //       lang="en"
-//       className={`${spaceGrotesk.variable} ${inter.variable} h-full`}
+//       className={`${spaceGrotesk.variable} ${manrope.variable} h-full`}
 //     >
 //       <body className="min-h-full flex flex-col bg-black text-white antialiased">
 //         {children}
@@ -35,6 +39,8 @@
 //     </html>
 //   );
 // }
+
+
 
 
 import type { Metadata } from "next";
@@ -59,6 +65,9 @@ export const metadata: Metadata = {
   title: "Revaya — Software That Runs Businesses",
   description:
     "Custom Software, ERP, HRMS, SaaS Platforms, Automation & Enterprise Solutions",
+  icons: {
+    icon: "/loogo.png",
+  },
 };
 
 export default function RootLayout({
