@@ -61,7 +61,7 @@ import styles from './WhyRevaya.module.css';
 const testimonialsData = [
   { 
     id: 1, 
-    quote: "Solvit Revaya Digital delivered exactly what we envisioned. Professional team, smooth communication, and outstanding results from start to finish.", 
+    quote: "Revaya Digital delivered exactly what we envisioned. Professional team, smooth communication, and outstanding results from start to finish.", 
     name: "Syed Shaheer Akbar", 
     role: "Founder, SOLVIT", 
     avatar: "/solvit avatar.png" 
@@ -75,18 +75,19 @@ const testimonialsData = [
   },
   { 
     id: 3, 
+    quote: "Revaya Digital developed a reliable system that made our daily operations much more organized and efficient. The entire experience was smooth, and the team was great to work with.", 
+    name: "Ghani Essani", 
+    role: "Executive Manager, Rujhan", 
+    avatar: "/hani.png" 
+  },
+  { 
+    id: 4, 
     quote: "Professional, reliable, and detail oriented. Revaya Digital created a website that perfectly reflects our brand.", 
     name: "Raheel Bawa", 
     role: "Managing Director, Astro Detailing Studio", 
     avatar: "/astro avatar.png" 
   },
-  { 
-    id: 4, 
-    quote: "Revaya Digital developed a reliable system that made our daily operations much more organized and efficient. The entire experience was smooth, and the team was great to work with.", 
-    name: "Ghani Essani", 
-    role: "Executive Manager, Rujhan", 
-    avatar: "/hani.png" 
-  }
+  
 ];
 
 export const WhyRevaya: React.FC = () => {
