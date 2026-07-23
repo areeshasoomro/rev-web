@@ -124,13 +124,15 @@
 
 //       {isModalOpen && (
 //         <div className={styles.modalOverlay} onClick={() => setIsModalOpen(false)}>
-//           <div className={styles.modalBody} style={{ maxWidth: '700px' }} onClick={(e) => e.stopPropagation()}>
+//           <div className={styles.modalBody} onClick={(e) => e.stopPropagation()}>
 //             <button className={styles.modalCloseBtn} onClick={() => setIsModalOpen(false)}>&times;</button>
 //             <h3 className={styles.modalTitle}>Schedule a Discovery Call</h3>
+            
+//             {/* Calendly Inline Widget Integration */}
 //             <div 
 //               className="calendly-inline-widget" 
-//               data-url="https://calendly.com/adamkamani111?hide_landing_page_details=1&hide_gdpr_banner=1" 
-//               style={{ minWidth: '320px', height: '400px', width: '100%' }}
+//               data-url="https://calendly.com/contact-revaya/30min" 
+//               style={{ minWidth: '320px', height: '600px', width: '100%' }}
 //             ></div>
 //           </div>
 //         </div>
@@ -156,7 +158,8 @@ export const ContactSection: React.FC = () => {
     name: '',
     email: '',
     phone: '',
-    discovery: ''
+    discovery: '',
+    projectDetails: ''
   });
 
   // Inject Calendly script when modal opens
@@ -168,7 +171,6 @@ export const ContactSection: React.FC = () => {
       document.body.appendChild(script);
       
       return () => {
-        // Clean up script when modal closes
         const scriptElement = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
         if (scriptElement) {
           document.body.removeChild(scriptElement);
@@ -177,16 +179,63 @@ export const ContactSection: React.FC = () => {
     }
   }, [isModalOpen]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowToast(true);
-    setFormData({ name: '', email: '', phone: '', discovery: '' });
-    setTimeout(() => setShowToast(false), 4500);
+
+    // Custom formatted message body for Revaya
+    const customMessage = `
+--- REVAYA DIGITAL INQUIRY ---
+
+A new client has reached out through the Revaya platform. Here are their project details:
+
+• Client Name: ${formData.name}
+• Email Address: ${formData.email}
+• Phone Number: ${formData.phone}
+• Discovery Source: ${formData.discovery}
+
+Project Overview / Details:
+${formData.projectDetails}
+
+----------------------------------------
+This notification was sent automatically from your Revaya web application.
+    `.trim();
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          access_key: "6100abb8-2b26-45ba-aee0-b726cf2bab66",
+          subject: `Revaya Project Request: ${formData.name}`, // Customized Subject Line
+          from_name: "Revaya Notifications",                 // Custom Sender Name
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          discovery: formData.discovery,
+          message: customMessage,                            // Custom structured body text
+        })
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setShowToast(true);
+        setFormData({ name: '', email: '', phone: '', discovery: '', projectDetails: '' });
+        setTimeout(() => setShowToast(false), 4500);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      alert("Failed to send message.");
+    }
   };
 
   const whatsappNumber = "+923277862326";
@@ -222,16 +271,61 @@ export const ContactSection: React.FC = () => {
           </p>
 
           <form onSubmit={handleFormSubmit} className={styles.contactForm}>
-            <input type="text" name="name" placeholder="Name *" required value={formData.name} onChange={handleInputChange} className={styles.formInput} />
-            <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} className={styles.formInput} />
-            <input type="tel" name="phone" placeholder="Phone number *" required value={formData.phone} onChange={handleInputChange} className={styles.formInput} />
-            <select name="discovery" value={formData.discovery} onChange={handleInputChange} required className={styles.formSelect}>
+            <input 
+              type="text" 
+              name="name" 
+              placeholder="Name *" 
+              required 
+              value={formData.name} 
+              onChange={handleInputChange} 
+              className={styles.formInput} 
+            />
+            
+            <input 
+              type="email" 
+              name="email" 
+              placeholder="Email *" 
+              required
+              value={formData.email} 
+              onChange={handleInputChange} 
+              className={styles.formInput} 
+            />
+            
+            <input 
+              type="tel" 
+              name="phone" 
+              placeholder="Phone number *" 
+              required 
+              value={formData.phone} 
+              onChange={handleInputChange} 
+              className={styles.formInput} 
+            />
+
+            <textarea 
+              name="projectDetails" 
+              placeholder="Tell Us About Your Project *" 
+              required 
+              rows={4}
+              value={formData.projectDetails} 
+              onChange={handleInputChange} 
+              className={styles.formInput} 
+              style={{ resize: 'vertical', borderRadius: '20px', padding: '16px 24px' }}
+            />
+
+            <select 
+              name="discovery" 
+              value={formData.discovery} 
+              onChange={handleInputChange} 
+              required 
+              className={styles.formSelect}
+            >
               <option value="" disabled hidden>How did you find us?</option>
               <option value="linkedin">LinkedIn</option>
               <option value="google">Google Search</option>
               <option value="recommendation">Word of Mouth / Recommendation</option>
               <option value="other">Other</option>
             </select>
+
             <button type="submit" className={styles.submitBtn}>SEND</button>
           </form>
 
@@ -269,8 +363,6 @@ export const ContactSection: React.FC = () => {
           <div className={styles.modalBody} onClick={(e) => e.stopPropagation()}>
             <button className={styles.modalCloseBtn} onClick={() => setIsModalOpen(false)}>&times;</button>
             <h3 className={styles.modalTitle}>Schedule a Discovery Call</h3>
-            
-            {/* Calendly Inline Widget Integration */}
             <div 
               className="calendly-inline-widget" 
               data-url="https://calendly.com/contact-revaya/30min" 

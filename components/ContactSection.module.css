@@ -114,6 +114,31 @@
   border-color: rgba(1, 144, 249, 0.6);
 }
 
+/* Add this alongside .formInput styles */
+.formTextarea {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 16px 24px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #ffffff;
+  outline: none;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color 0.2s ease;
+}
+
+.formTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.formTextarea:focus {
+  border-color: rgba(1, 144, 249, 0.6);
+}
+
 /* ─── FIGMA CARD SPECIFIC GRADIENTS ─── */
 .submitBtn {
   width: 100%;
