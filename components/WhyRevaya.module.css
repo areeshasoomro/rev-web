@@ -66,6 +66,7 @@
 .avatarWrapper { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); }
 .avatarFrame { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--color-blue-electric); overflow: hidden; background: #020205; }
 .avatarImage { width: 100%; height: 100%; object-fit: cover; }
+.avatar_change { width: 100%; height: 100%; object-fit: cover; }
 
 .quoteText { font-size: 0.95rem; color: #ffffff; line-height: 1.6; margin-bottom: 20px; text-align: center; }
 .clientName { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; color: var(--color-blue-electric); margin: 0; text-align: center; }

@@ -63,10 +63,14 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: "Revaya — Software That Runs Businesses",
-  description:
-    "Custom Software, ERP, HRMS, SaaS Platforms, Automation & Enterprise Solutions",
+  description: "Custom Software, ERP, HRMS, SaaS Platforms, Automation & Enterprise Solutions",
   icons: {
-    icon: "/loogo.png",
+    icon: [
+      {
+        url: "/favicon.png",
+        href: "/favicon.png",
+      },
+    ],
   },
 };
 
