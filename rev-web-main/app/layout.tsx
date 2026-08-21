@@ -1,0 +1,90 @@
+
+
+
+// import type { Metadata } from "next";
+// import { Space_Grotesk, Manrope } from "next/font/google";
+// import "./globals.css";
+
+// const spaceGrotesk = Space_Grotesk({
+//   variable: "--font-space-grotesk",
+//   subsets: ["latin"],
+//   weight: ["400", "500", "600", "700"],
+//   display: "swap",
+// });
+
+// const manrope = Manrope({
+//   variable: "--font-manrope",
+//   subsets: ["latin"],
+//   weight: ["400", "500", "600", "700"],
+//   display: "swap",
+// });
+
+// export const metadata: Metadata = {
+//   title: "Revaya — Software That Runs Businesses",
+//   description:
+//     "Custom Software, ERP, HRMS, SaaS Platforms, Automation & Enterprise Solutions",
+// };
+
+// export default function RootLayout({
+//   children,
+// }: Readonly<{ children: React.ReactNode }>) {
+//   return (
+//     <html
+//       lang="en"
+//       className={`${spaceGrotesk.variable} ${manrope.variable} h-full`}
+//     >
+//       <body className="min-h-full flex flex-col bg-black text-white antialiased">
+//         {children}
+//       </body>
+//     </html>
+//   );
+// }
+
+
+
+
+import type { Metadata } from "next";
+import { Space_Grotesk, Manrope } from "next/font/google";
+import "./globals.css";
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "Revaya — Software That Runs Businesses",
+  description: "Custom Software, ERP, HRMS, SaaS Platforms, Automation & Enterprise Solutions",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.png",
+        href: "/favicon.png",
+      },
+    ],
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${manrope.variable} h-full`}
+    >
+      <body className="min-h-full flex flex-col bg-black text-white antialiased">
+        {children}
+      </body>
+    </html>
+  );
+}
