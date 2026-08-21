@@ -9,6 +9,7 @@ import { ContactSection } from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import { WhyRevaya } from "@/components/WhyRevaya";
 import Portfolio from '../components/Portfolio';
+import MyWorkSection from "@/components/MyWorkSection";
 
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
       <ServiceSection />
       <Roadmap />
       <Portfolio />
+      <MyWorkSection />
 
       <ArchitectureLayers />
       <WhyRevaya />
