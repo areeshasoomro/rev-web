@@ -9,15 +9,15 @@ const myWorkData = [
     id: 1, 
     slug: 'uga-academy', 
     badge: 'UI/UX Design', 
-    title: 'UGA Academy', 
-    shortDesc: 'Modern homepage revamp for smoother UX and stronger visual hierarchy.', 
+    title: 'U GlobalAcademy', 
+    shortDesc: 'Modern Homepage Revamp for smoother UX & stronger visual hierarchy', 
     cardImg: '/uga_thumbnail.png' 
   },
   { 
     id: 2, 
     slug: 'uga-academy', 
     badge: 'UI/UX Design', 
-    title: 'UGA Academy', 
+    title: 'U GlobalAcademy', 
     shortDesc: 'Modern homepage revamp for smoother UX and stronger visual hierarchy.', 
     cardImg: '/uga_thumbnail.png' 
   },
@@ -25,7 +25,7 @@ const myWorkData = [
     id: 3, 
     slug: 'uga-academy', 
     badge: 'UI/UX Design', 
-    title: 'UGA Academy', 
+    title: 'U GlobalAcademy', 
     shortDesc: 'Modern homepage revamp for smoother UX and stronger visual hierarchy.', 
     cardImg: '/uga_thumbnail.png' 
   },
@@ -33,7 +33,7 @@ const myWorkData = [
     id: 4, 
     slug: 'uga-academy', 
     badge: 'UI/UX Design', 
-    title: 'UGA Academy', 
+    title: 'U GlobalAcademy', 
     shortDesc: 'Modern homepage revamp for smoother UX and stronger visual hierarchy.', 
     cardImg: '/uga_thumbnail.png' 
   },
@@ -46,7 +46,7 @@ export const MyWorkSection: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % myWorkData.length);
-    }, 1500);
+    }, 2000);
     return () => clearInterval(timer);
   }, []);
 

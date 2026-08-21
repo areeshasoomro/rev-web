@@ -294,42 +294,67 @@ export default function UgaAcademyPage() {
         </motion.div>
       </section>
 
-      {/* SCALED-DOWN 3D LAPTOP WITH ENHANCED AMBIENT GLOW & MICROINTERACTIONS */}
+      {/* ULTRA-REALISTIC 3D LAPTOP HARDWARE SHOWCASE WITH MICROINTERACTIONS */}
       <section className={styles.laptop3DSection}>
         <div className={styles.ambientLaptopGlow}></div>
         <div className={styles.ambientLaptopGlowPulse}></div>
+        
         <motion.div 
           className={styles.laptopPerspectiveContainer}
-          animate={{ y: [0, -10, 0], rotateZ: [0, 0.3, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          whileHover={{ scale: 1.02, rotateX: 2, rotateY: -2 }}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
         >
-          <div className={styles.macbookGlowWrapper}>
-            <div className={styles.macbookMockup}>
-              <div className={styles.macbookScreenLid}>
-                <div className={styles.macbookNotch}>
-                  <div className={styles.macbookCameraDot}></div>
-                </div>
-                <div className={styles.screenInner}>
-                  <video 
-                    autoPlay 
-                    loop 
-                    muted 
-                    playsInline 
-                    className={styles.mockupVideo}
-                  >
-                    <source src="/uga-video.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+          <motion.div 
+            className={styles.macbookMockup}
+            animate={{ 
+              rotateX: [12, 14, 12], 
+              rotateY: [-14, -10, -14],
+              y: [0, -12, 0] 
+            }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ 
+              rotateX: 6, 
+              rotateY: -4, 
+              scale: 1.03,
+              transition: { duration: 0.4, ease: "easeOut" }
+            }}
+          >
+            {/* Screen Lid & Glass Reflection Frame */}
+            <div className={styles.macbookScreenLid}>
+              <div className={styles.macbookAntennaLine}></div>
+              <div className={styles.macbookNotch}>
+                <div className={styles.macbookCameraDot}></div>
+                <div className={styles.macbookSensorDot}></div>
               </div>
-              <div className={styles.macbookHinge}></div>
-              <div className={styles.macbookBaseDeck}>
-                <div className={styles.keyboardGrille}></div>
-                <div className={styles.trackpad}></div>
+              <div className={styles.screenInner}>
+                <video 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline 
+                  className={styles.mockupVideo}
+                >
+                  <source src="/uga-video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                {/* Glossy Glass Reflection Overlay */}
+                <div className={styles.screenGlassReflection}></div>
               </div>
             </div>
-          </div>
+
+            {/* Aluminum Hinge with Metallic Gradient */}
+            <div className={styles.macbookHinge}></div>
+
+            {/* Realistic 3D Keyboard Base Deck */}
+            <div className={styles.macbookBaseDeck}>
+              <div className={styles.keyboardWell}>
+                <div className={styles.keyboardGrille}></div>
+              </div>
+              <div className={styles.trackpad}></div>
+              <div className={styles.lipIndent}></div>
+            </div>
+          </motion.div>
         </motion.div>
       </section>
 

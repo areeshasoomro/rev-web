@@ -116,10 +116,10 @@
   height: 100%;
   object-fit: cover;
 }
-
 .cardTitle {
   font-family: var(--font-heading);
   font-size: 1.25rem;
+  font-weight: 400; /* Makes the title bold */
   margin: 0 0 2px 0;
 }
 
