@@ -47,6 +47,9 @@
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
 }
+[data-theme="light"] .subText {
+  color: #020202;
+}
 
 /* TRACK & PILLARS CONTAINER */
 .roadmapTrack {
@@ -187,6 +190,7 @@
   color: #ffffff;
 }
 
+
 /* OPEN ACTIVE PILLAR ARCHITECTURE */
 .openContent {
   padding: 32px;
@@ -263,6 +267,9 @@
   letter-spacing: -0.01em;
 }
 
+[data-theme="light"] .activeTitle {
+  color: #ffffff;
+}
 .activeDescription {
   font-family: var(--font-subtext);
   font-size: 0.95rem;

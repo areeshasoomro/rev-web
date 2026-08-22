@@ -236,9 +236,9 @@ export default function Hero() {
                 margin: 0,
               }}
             >
-              <span className="block text-white whitespace-normal md:whitespace-nowrap">
-                We Build Software That
-              </span>
+              <span className="block text-[var(--text-main)] whitespace-normal md:whitespace-nowrap">
+  We Build Software That
+</span>
               <span
                 className="block mt-[0.1em] whitespace-normal md:whitespace-nowrap"
                 style={{
@@ -251,7 +251,7 @@ export default function Hero() {
               </span>
             </motion.h1>
 
-            <motion.p
+            {/* <motion.p
               variants={fadeUp}
               style={{
                 fontFamily: "var(--font-inter)",
@@ -265,8 +265,24 @@ export default function Hero() {
               From ERP and HRMS to SaaS platforms and business automation, we deliver
               scalable technology solutions that streamline operations and accelerate
               success.
-            </motion.p>
+            </motion.p> */}
 
+            <motion.p
+  variants={fadeUp}
+  style={{
+    fontFamily: "var(--font-inter)",
+    fontSize: "clamp(0.92rem, 0.98vw, 1.05rem)",
+    color: "var(--subtext, rgba(255,255,255,0.55))",
+    lineHeight: 1.75,
+    marginTop: "1.5rem",
+    maxWidth: "460px",
+  }}
+>
+  From ERP and HRMS to SaaS platforms and business automation, we deliver
+  scalable technology solutions that streamline operations and accelerate
+  success.
+</motion.p>
+           
             <motion.div
               variants={fadeUp}
               className="flex flex-row flex-wrap gap-4 items-center justify-center md:justify-start"
@@ -474,24 +490,63 @@ function FloatingParticles() {
   )
 }
 
+// function AnnotationCard({ title, desc }: { title: string; desc: string }) {
+//   return (
+//     <div
+//       className="w-[145px] sm:w-[165px] md:w-[205px] p-[8px_10px] md:p-[12px_14px]"
+//       style={{
+//         background: "rgba(5,8,20,0.85)",
+//         backdropFilter: "blur(16px)",
+//         WebkitBackdropFilter: "blur(16px)",
+//         border: "1px solid rgba(255,255,255,0.09)",
+//         borderRadius: "12px md:14px",
+//         boxShadow: "0 12px 32px rgba(0,0,0,0.7), 0 0 0 0.5px rgba(1,144,249,0.15)",
+//       }}
+//     >
+//       <p
+//         className="text-[11.5px] md:text-[13px]"
+//         style={{
+//           fontFamily: "var(--font-space-grotesk)",
+//           fontWeight: 700, color: "#fff", margin: 0,
+//         }}
+//       >
+//         {title}
+//       </p>
+//       <p
+//         className="text-[10px] md:text-[12px]"
+//         style={{
+//           fontFamily: "var(--font-inter)",
+//           color: "rgba(255,255,255,0.5)", lineHeight: 1.35, margin: "4px 0 0",
+//         }}
+//       >
+//         {desc}
+//       </p>
+//     </div>
+//   )
+// }
+
+
+
 function AnnotationCard({ title, desc }: { title: string; desc: string }) {
   return (
     <div
       className="w-[145px] sm:w-[165px] md:w-[205px] p-[8px_10px] md:p-[12px_14px]"
       style={{
-        background: "rgba(5,8,20,0.85)",
+        background: "var(--card-bg, rgba(5,8,20,0.85))",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
-        border: "1px solid rgba(255,255,255,0.09)",
-        borderRadius: "12px md:14px",
-        boxShadow: "0 12px 32px rgba(0,0,0,0.7), 0 0 0 0.5px rgba(1,144,249,0.15)",
+        border: "1px solid var(--card-border, rgba(255,255,255,0.09))",
+        borderRadius: "14px",
+        boxShadow: "var(--card-shadow, 0 12px 32px rgba(0,0,0,0.7), 0 0 0 0.5px rgba(1,144,249,0.15))",
       }}
     >
       <p
         className="text-[11.5px] md:text-[13px]"
         style={{
           fontFamily: "var(--font-space-grotesk)",
-          fontWeight: 700, color: "#fff", margin: 0,
+          fontWeight: 700, 
+          color: "var(--card-title, #fff)", 
+          margin: 0,
         }}
       >
         {title}
@@ -500,7 +555,9 @@ function AnnotationCard({ title, desc }: { title: string; desc: string }) {
         className="text-[10px] md:text-[12px]"
         style={{
           fontFamily: "var(--font-inter)",
-          color: "rgba(255,255,255,0.5)", lineHeight: 1.35, margin: "4px 0 0",
+          color: "var(--card-desc, rgba(255,255,255,0.5))", 
+          lineHeight: 1.35, 
+          margin: "4px 0 0",
         }}
       >
         {desc}
@@ -508,6 +565,8 @@ function AnnotationCard({ title, desc }: { title: string; desc: string }) {
     </div>
   )
 }
+
+
 
 function PillButton({
   href,
@@ -540,7 +599,7 @@ function PillButton({
               boxShadow: "0 0 24px rgba(1,144,249,0.4)",
             }
           : {
-              background: "rgba(0,0,0,0.55)",
+              background: "rgba(2, 2, 2, 0.45)",
               border: "1.8px solid #1a50ee",
             }),
       }}

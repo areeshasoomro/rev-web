@@ -39,6 +39,9 @@
   margin: 0 auto 64px;
   line-height: 1.6;
 }
+[data-theme="light"] .subtext {
+  color: #000000;
+}
 
 /* ─── 3-COLUMN ASYMMETRIC BENTO GRID ─── */
 .grid {
@@ -73,6 +76,10 @@
   font-weight: 700;
   margin: 0 0 12px 0;
   letter-spacing: -0.01em;
+  color: #ffffff;
+}
+[data-theme="light"] .cardTitle {
+  color: #ffffff;
 }
 
 .cardDescription {

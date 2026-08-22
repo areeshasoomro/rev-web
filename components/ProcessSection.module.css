@@ -120,6 +120,12 @@
   margin: 0 auto 72px;
 }
 
+
+/* --- Light Mode Override --- */
+[data-theme="light"] .subtext {
+  color: #000000; /* Changes text color to black in light mode */
+}
+
 /* ===== Diagram layout ===== */
 .diagram {
   position: relative;
@@ -270,6 +276,20 @@
   height: 17px;
   flex-shrink: 0;
   color: rgba(255, 255, 255, 0.45);
+}
+/* --- LIGHT MODE OVERRIDES --- */
+[data-theme="light"] .pillBody {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .pillLabel {
+  color: #000000;
+}
+
+[data-theme="light"] .pillIcon {
+  color: #000000;
 }
 
 .pillIcon svg {
