@@ -699,3 +699,11 @@
   background: #0190f9;
   box-shadow: 0 0 10px rgba(1, 144, 249, 0.6);
 }
+/* Hide scrollbar for category tabs while maintaining scroll functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

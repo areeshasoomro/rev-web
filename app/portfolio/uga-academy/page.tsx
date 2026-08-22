@@ -1,293 +1,303 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import styles from './UgaAcademyPage.module.css';
-import CTASection from '@/components/CTASection';
 
-const screenshotAssets = [
-  { id: 1, title: "Dashboard Overview", image: "/uga-thumb.png" },
-  { id: 2, title: "Course Curriculum Module", image: "/uga2.png" },
-  { id: 3, title: "Interactive Quiz Engine", image: "/uga3.png" },
-  { id: 4, title: "Student Analytics Panel", image: "/uga4.png" },
-  { id: 5, title: "Live Class Schedule View", image: "/uga5.png" },
-  { id: 6, title: "Teacher Grading Workspace", image: "/uga6.png" },
-  { id: 7, title: "Parent Notification Center", image: "/uga7.png" },
-  { id: 9, title: "Resource Library View", image: "/uga9.png" },
-  { id: 10, title: "Student Profile & Settings", image: "/uga10.png" },
-  { id: 11, title: "Mobile Responsive Layout", image: "/uga11.png" },
+const categories = [
+  { id: "all", label: "ALL", count: 5 },
+  { id: "ui-ux", label: "UI/UX DESIGN", count: 2 },
+  { id: "website-design", label: "WEBSITE DESIGN", count: 0 },
+  { id: "mobile-app", label: "MOBILE APP", count: 1 },
+  { id: "branding", label: "BRANDING", count: 1 },
+  { id: "logo", label: "LOGO", count: 0 },
 ];
 
-export default function UgaAcademyPage() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLight, setIsLight] = useState(false);
+const projectsData = [
+  {
+    id: "uga-academy-1",
+    title: "U Global Academy",
+    category: "ui-ux",
+    categoryLabel: "UI/UX DESIGN",
+    thumbnail: "/uga-1.png",
+    link: "/portfolio/uga-academy",
+    description: "Modern homepage revamp for smoother UX and visual hierarchy.",
+    stats: "01 / 03",
+    isFullPageUga: true,
+    images: Array.from({ length: 11 }, (_, i) => `/uga-${i + 1}.png`)
+  },
+  {
+    id: "uga-academy-2",
+    title: "U Global Academy",
+    category: "ui-ux",
+    categoryLabel: "UI/UX DESIGN",
+    thumbnail: "/uga-1.png",
+    link: "/portfolio/uga-academy",
+    description: "Interactive student dashboard and enrollment flow architecture.",
+    stats: "02 / 03",
+    isFullPageUga: true,
+    images: Array.from({ length: 11 }, (_, i) => `/uga-${i + 1}.png`)
+  },
+  {
+    id: "rebin-app",
+    title: "Rebin App Design",
+    category: "mobile-app",
+    categoryLabel: "MOBILE APP",
+    thumbnail: "/rebin-app.png",
+    link: "#",
+    description: "The ultimate eco-reward App engineered to turn sustainable recycling into an engaging and rewarding experience.",
+    stats: "01 / 01",
+    isFullPageUga: false,
+    images: ["/rebin-app.png"]
+  },
+  {
+    id: "revaya-pos-banner",
+    title: "Revaya POS Banner",
+    category: "branding",
+    categoryLabel: "BRANDING",
+    thumbnail: "/pos-banner.png",
+    link: "#",
+    description: "High-conversion promotional banner layout for Revaya POS branding.",
+    stats: "01 / 01",
+    isFullPageUga: false,
+    images: ["/pos-banner.png"]
+  }
+];
 
-  // Sync state with theme toggles on the HTML element
-  useEffect(() => {
-    const checkTheme = () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      setIsLight(currentTheme === 'light');
-    };
+interface Project {
+  id: string;
+  title: string;
+  category: string;
+  categoryLabel: string;
+  thumbnail: string;
+  link: string;
+  description: string;
+  stats: string;
+  isFullPageUga: boolean;
+  images: string[];
+}
 
-    checkTheme();
+export default function CreativeWorkPage() {
+  const [activeCategory, setActiveCategory] = useState<string>("ui-ux");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'data-theme') {
-          checkTheme();
-        }
-      });
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const getVisibleCards = () => {
-    const items = [];
-    for (let i = -2; i <= 2; i++) {
-      const index = (currentIndex + i + screenshotAssets.length) % screenshotAssets.length;
-      items.push({ ...screenshotAssets[index], offset: i });
-    }
-    return items;
-  };
+  const filteredProjects = activeCategory === "all" 
+    ? projectsData 
+    : projectsData.filter(p => p.category === activeCategory);
 
   return (
-    <div className={styles.pageWrapper}>
-      {/* Background Interactive Gradient Mesh */}
-      <div className={styles.ambientBackgroundMesh}>
-        <div className={styles.meshBlob1}></div>
-        <div className={styles.meshBlob2}></div>
-      </div>
-
-      {/* Top Navbar with Clean Text Back Button */}
-      <nav className={styles.navbar}>
+    <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-8 font-sans">
+      
+      {/* Top Navigation with Back Link */}
+      <nav className="max-w-6xl mx-auto mb-8 flex items-center justify-between">
         <motion.div whileHover={{ x: -4 }} transition={{ type: "spring", stiffness: 300 }}>
-          <Link href="/" className={styles.backLink}>
+          <Link href="/" className="text-[#0190f9] font-medium text-sm hover:opacity-80 transition-opacity flex items-center gap-1.5">
             &lt; Back
           </Link>
         </motion.div>
       </nav>
 
-      {/* Centered Brand Header with Entrance Animation */}
+      {/* Balanced Strong Headline & Large Detailed Subtext */}
       <motion.div 
-        className={styles.brandCenterContainer}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="max-w-4xl mx-auto text-center mb-14"
       >
-        <div className={styles.agencyLogoWrapper}>
-          <Image 
-            src={isLight ? "/rev-logo.png" : "/loogo.png"} 
-            alt="Revaya Logo" 
-            width={isLight ? 250 : 150} 
-            height={isLight ? 250 : 150} 
-            className={`w-auto object-contain transition-all duration-200 ${isLight ? "h-12 md:h-14" : "h-20"}`}
-            priority
-          />
-        </div>
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 text-white leading-tight">
+          Ideas We Turned Into <span className="text-[#0190f9]">Reality.</span>
+        </h1>
+        <p className="text-zinc-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+          Step behind the scenes of our creative workshop—exploring bold interfaces, scalable architectures, and production-ready apps that redefine digital experiences.
+        </p>
       </motion.div>
 
-      {/* Hero Header with Unified Typography and Highlighted Blue Keywords */}
-      <section className={styles.heroSection}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          <h1 className={styles.heroTitle}>
-            <span className={styles.blueText}>Modernized</span> Virtual School <span className={styles.blueText}>Experience</span>
-          </h1>
-          <p className={styles.heroDesc}>
-            We partnered with UGA Academy to build a high-performance digital learning platform that reflects their elite brand and streamlines student engagement.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* ULTRA-REALISTIC 3D LAPTOP HARDWARE SHOWCASE WITH MICROINTERACTIONS */}
-      <section className={styles.laptop3DSection}>
-        <div className={styles.ambientLaptopGlow}></div>
-        <div className={styles.ambientLaptopGlowPulse}></div>
-        
-        <motion.div 
-          className={styles.laptopPerspectiveContainer}
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.div 
-            className={styles.macbookMockup}
-            animate={{ 
-              rotateX: [12, 14, 12], 
-              rotateY: [-14, -10, -14],
-              y: [0, -12, 0] 
-            }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            whileHover={{ 
-              rotateX: 6, 
-              rotateY: -4, 
-              scale: 1.03,
-              transition: { duration: 0.4, ease: "easeOut" }
-            }}
-          >
-            {/* Screen Lid & Glass Reflection Frame */}
-            <div className={styles.macbookScreenLid}>
-              <div className={styles.macbookAntennaLine}></div>
-              <div className={styles.macbookNotch}>
-                <div className={styles.macbookCameraDot}></div>
-                <div className={styles.macbookSensorDot}></div>
-              </div>
-              <div className={styles.screenInner}>
-                <video 
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline 
-                  className={styles.mockupVideo}
-                >
-                  <source src="/uga-video.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                {/* Glossy Glass Reflection Overlay */}
-                <div className={styles.screenGlassReflection}></div>
-              </div>
-            </div>
-
-            {/* Aluminum Hinge with Metallic Gradient */}
-            <div className={styles.macbookHinge}></div>
-
-            {/* Realistic 3D Keyboard Base Deck */}
-            <div className={styles.macbookBaseDeck}>
-              <div className={styles.keyboardWell}>
-                <div className={styles.keyboardGrille}></div>
-              </div>
-              <div className={styles.trackpad}></div>
-              <div className={styles.lipIndent}></div>
-            </div>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* Problem & Solution Node Layout with Interactive Glow Cards */}
-      <section className={styles.interactiveSwitcherSection}>
-        <div className={styles.nodeLayoutContainer}>
-          
-          {/* Problem Header Badge & Card */}
-          <motion.div 
-            className={styles.nodeColumnLeft}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className={styles.nodeBadge}>
-              <span>Problem</span>
-              <span className={styles.dotRed}></span>
-            </div>
-            <motion.div className={styles.nodeCard} whileHover={{ y: -4, borderColor: 'rgba(239, 68, 68, 0.3)' }}>
-              <h3>Inconsistent &amp; Casual UX</h3>
-              <p>Their earlier website suffered from an inconsistent visual hierarchy, casual styling, and critical UX mistakes that diminished brand credibility and user trust.</p>
-            </motion.div>
-          </motion.div>
-
-          {/* S-Curve Bridge with Nodes */}
-          <div className={styles.connectorBridge}>
-            <div className={styles.connectorLine}>
-              <span className={styles.nodeCircleTop}></span>
-              <span className={styles.nodeCircleBottom}></span>
-            </div>
-          </div>
-
-          {/* Solution Card & Header Badge */}
-          <motion.div 
-            className={styles.nodeColumnRight}
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <motion.div className={styles.nodeCardSolution} whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(1, 144, 249, 0.2)' }}>
-              <h3>Complete Homepage Revamp</h3>
-              <p>We completely revamped their website homepage with a unified brand color palette, premium aesthetics, and fully modernized every single section for an elite user experience.</p>
-            </motion.div>
-            <div className={styles.nodeBadgeSolution}>
-              <span>Solution</span>
-              <span className={styles.dotBlue}></span>
-            </div>
-          </motion.div>
-
-        </div>
-      </section>
-
-      {/* ENLARGED FULL-BLEED CURVED 3D CAROUSEL */}
-      <section className={styles.curvedCarouselSection}>
-        <motion.div 
-          className={styles.carouselHeader}
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className={styles.carouselTitle}>
-            Visual <span className={styles.blueText}>Highlights</span>
-          </h2>
-          <p className={styles.carouselSubtitle}>Explore the complete platform design system</p>
-        </motion.div>
-
-        <div className={styles.curvedStage}>
-          {getVisibleCards().map((item) => {
-            const offset = item.offset;
-            const absOffset = Math.abs(offset);
-
-            const translateX = offset * 360;
-            const translateZ = -absOffset * 140;
-            const rotateY = offset * -14;
-            const scale = 1 - absOffset * 0.18;
-            const opacity = absOffset > 1 ? 0.35 : absOffset === 1 ? 0.75 : 1;
-            const zIndex = 10 - absOffset;
-
-            return (
-              <motion.div
-                key={item.id}
-                className={styles.curvedCard}
-                animate={{
-                  x: translateX,
-                  z: translateZ,
-                  rotateY: rotateY,
-                  scale: scale,
-                  opacity: opacity,
-                }}
-                transition={{ type: "spring", stiffness: 280, damping: 28 }}
-                style={{ zIndex }}
-                onClick={() => setCurrentIndex((currentIndex + offset + screenshotAssets.length) % screenshotAssets.length)}
-                whileHover={{ scale: scale * 1.04, borderColor: 'rgba(1, 144, 249, 0.8)' }}
+      {/* Category Filter Navigation Bar */}
+      <div className="max-w-6xl mx-auto flex items-center justify-start md:justify-center overflow-x-auto pb-4 mb-16 gap-3 no-scrollbar">
+        {categories.map((cat) => {
+          const isActive = activeCategory === cat.id;
+          return (
+            <motion.button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`relative flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-colors duration-300 ${
+                isActive 
+                  ? "text-[#0190f9]" 
+                  : "text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-700 bg-transparent"
+              }`}
+            >
+              {isActive && (
+                <motion.div
+                  layoutId="activeCategoryIndicator"
+                  className="absolute inset-0 rounded-full border-2 border-[#0190f9] bg-[#0190f9]/10 shadow-lg shadow-[#0190f9]/20 pointer-events-none"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{cat.label}</span>
+              <motion.span 
+                animate={{ scale: isActive ? 1.1 : 1 }}
+                className={`relative z-10 text-[10px] px-1.5 py-0.5 rounded-full ${isActive ? "bg-[#0190f9] text-black font-extrabold" : "bg-zinc-900 text-zinc-400"}`}
               >
-                <div className={styles.cardImageFull}>
-                  <img src={item.image} alt={item.title} />
+                {cat.count}
+              </motion.span>
+            </motion.button>
+          );
+        })}
+      </div>
+
+      {/* Projects Grid with Smooth Layout Animation */}
+      <motion.div 
+        layout 
+        className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.map((project) => (
+            <motion.div
+              key={project.id}
+              layout
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: -20 }}
+              transition={{ duration: 0.4, type: "spring", stiffness: 260, damping: 20 }}
+              whileHover={{ 
+                y: -8, 
+                transition: { type: "spring", stiffness: 300, damping: 20 } 
+              }}
+              onClick={() => setSelectedProject(project)}
+              className="bg-zinc-950 rounded-2xl overflow-hidden border border-zinc-800 shadow-xl hover:border-[#0190f9]/50 cursor-pointer group flex flex-col justify-between"
+            >
+              <div>
+                <div className="p-4 pb-3 flex items-center justify-between border-b border-zinc-900">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-[#0190f9] text-white">
+                    {project.categoryLabel}
+                  </span>
+                  <span className="text-[11px] font-mono text-zinc-500">
+                    {project.stats}
+                  </span>
                 </div>
-              </motion.div>
-            );
-          })}
-        </div>
 
-        {/* Pagination Dots */}
-        <div className={styles.paginationDotsContainer}>
-          {screenshotAssets.map((_, idx) => (
-            <button
-              key={idx}
-              className={`${styles.paginationDot} ${currentIndex === idx ? styles.activeDot : ''}`}
-              onClick={() => setCurrentIndex(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
+                {/* Card Thumbnail Window */}
+                <div className="relative w-full p-4 pb-2 bg-gradient-to-b from-zinc-900/40 to-transparent">
+                  <div className="rounded-lg overflow-hidden border border-zinc-800/80 bg-zinc-900 h-48 relative">
+                    <motion.img 
+                      src={project.thumbnail} 
+                      alt={project.title}
+                      className="w-full h-full object-cover object-top"
+                      whileHover={{ scale: 1.06 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 pt-2 flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-white group-hover:text-[#0190f9] transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs text-zinc-400 mt-1 line-clamp-1">
+                    {project.description}
+                  </p>
+                </div>
+
+                <motion.div 
+                  whileHover={{ rotate: 45, scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="w-9 h-9 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-[#0190f9] group-hover:bg-[#0190f9] group-hover:text-white transition-colors shadow-md shrink-0 ml-3"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </motion.div>
+              </div>
+            </motion.div>
           ))}
-        </div>
-      </section>
+        </AnimatePresence>
+      </motion.div>
 
-      <CTASection />     
+      {/* Click-to-Open Modal Detail View */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 md:p-10"
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.85, opacity: 0, y: 40 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 40 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="bg-zinc-950 border border-zinc-800 w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="absolute top-4 right-4 z-20">
+                <motion.button 
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setSelectedProject(null)}
+                  className="w-10 h-10 rounded-full bg-zinc-900 text-zinc-400 hover:text-white flex items-center justify-center transition-colors border border-zinc-800 shadow-lg"
+                  aria-label="Close modal"
+                >
+                  ✕
+                </motion.button>
+              </div>
+
+              {/* Modal Container with Vertical Scrolling */}
+              <div className="overflow-y-auto p-6 sm:p-10 custom-scrollbar flex-1">
+                <motion.div 
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="mb-6"
+                >
+                  <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#0190f9] text-white">
+                    {selectedProject.categoryLabel}
+                  </span>
+                  <h2 className="text-3xl font-extrabold text-white mt-3">
+                    {selectedProject.title}
+                  </h2>
+                  <p className="text-zinc-400 mt-2">
+                    {selectedProject.description}
+                  </p>
+                </motion.div>
+
+                {/* Seamless Stacked Full-Page Image Preview */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 mb-6 flex flex-col"
+                >
+                  {selectedProject.images.map((imgSrc, index) => (
+                    <img 
+                      key={index} 
+                      src={imgSrc} 
+                      alt={`${selectedProject.title} section ${index + 1}`}
+                      className="w-full h-auto object-cover block m-0 p-0"
+                    />
+                  ))}
+                </motion.div>
+
+                <div className="flex justify-end">
+                  <motion.button 
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => setSelectedProject(null)}
+                    className="px-6 py-3 rounded-2xl bg-zinc-900 text-zinc-300 font-semibold hover:bg-zinc-800 transition-colors border border-zinc-800"
+                  >
+                    Close Preview
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 }
