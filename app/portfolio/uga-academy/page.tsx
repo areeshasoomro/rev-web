@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const categories = [
-  { id: "all", label: "ALL", count: 5 },
+  { id: "all", label: "ALL", count: 8 },
   { id: "ui-ux", label: "UI/UX DESIGN", count: 2 },
-  { id: "website-design", label: "WEBSITE DESIGN", count: 0 },
-  { id: "mobile-app", label: "MOBILE APP", count: 1 },
+  { id: "website-design", label: "WEBSITE DESIGN", count: 3 },
+  { id: "mobile-app", label: "MOBILE APP", count: 2 },
   { id: "branding", label: "BRANDING", count: 1 },
   { id: "logo", label: "LOGO", count: 0 },
 ];
@@ -36,6 +36,54 @@ const projectsData = [
     stats: "02 / 03",
     isFullPageUga: true,
     images: Array.from({ length: 11 }, (_, i) => `/uga-${i + 1}.png`)
+  },
+  {
+    id: "solvit-website",
+    title: "Solvit Website",
+    category: "website-design",
+    categoryLabel: "WEBSITE DESIGN",
+    thumbnail: "/solv-01.png",
+    link: "#",
+    description: "Comprehensive learning management platform and content workspace interface.",
+    stats: "01 / 01",
+    isFullPageUga: false,
+    images: Array.from({ length: 10 }, (_, i) => `/solv-${String(i + 1).padStart(2, '0')}.png`)
+  },
+  {
+    id: "rujhan-website",
+    title: "Rujhan Website",
+    category: "website-design",
+    categoryLabel: "WEBSITE DESIGN",
+    thumbnail: "/ruj-01.png",
+    link: "#",
+    description: "Modern digital platform workspace with interactive layouts and production builds.",
+    stats: "01 / 01",
+    isFullPageUga: false,
+    images: Array.from({ length: 5 }, (_, i) => `/ruj-${String(i + 1).padStart(2, '0')}.png`)
+  },
+  {
+    id: "astro-website",
+    title: "Astro Website",
+    category: "website-design",
+    categoryLabel: "WEBSITE DESIGN",
+    thumbnail: "/ast-01.png",
+    link: "#",
+    description: "Sleek enterprise interface design with smooth styling and responsive views.",
+    stats: "01 / 01",
+    isFullPageUga: false,
+    images: Array.from({ length: 9 }, (_, i) => `/ast-${String(i + 1).padStart(2, '0')}.png`)
+  },
+  {
+    id: "solvit-mobile-app",
+    title: "Solvit Mobile App",
+    category: "mobile-app",
+    categoryLabel: "MOBILE APP",
+    thumbnail: "/solvit-app-show.png",
+    link: "#",
+    description: "On-the-go educational tracking and mobile-optimized student workflows.",
+    stats: "01 / 01",
+    isFullPageUga: false,
+    images: ["/solvit-app-show.png"]
   },
   {
     id: "rebin-app",
