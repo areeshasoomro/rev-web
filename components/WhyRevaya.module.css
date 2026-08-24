@@ -29,6 +29,9 @@
 
 .brandText { color: var(--color-blue-electric); }
 .subText { color: rgba(255, 255, 255, 0.6); margin-bottom: 40px; line-height: 1.6; }
+[data-theme="light"] .subText {
+  color: #000000;
+}
 
 .videoContainer {
   width: 100%;
@@ -69,8 +72,14 @@
 .avatar_change { width: 100%; height: 100%; object-fit: cover; }
 
 .quoteText { font-size: 0.95rem; color: #ffffff; line-height: 1.6; margin-bottom: 20px; text-align: center; }
+[data-theme="light"] .quoteText {
+  color: #000000;
+}
 .clientName { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; color: var(--color-blue-electric); margin: 0; text-align: center; }
 .clientRole { display: block; font-size: 0.7rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; text-align: center; margin-top: 4px; }
+[data-theme="light"] .clientRole {
+  color: #000000;
+}
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
 

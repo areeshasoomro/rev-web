@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -127,13 +127,40 @@ interface Project {
 export default function CreativeWorkPage() {
   const [activeCategory, setActiveCategory] = useState<string>("ui-ux");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  
+  // State to track the root theme attribute
+  const [currentTheme, setCurrentTheme] = useState<string>("dark");
+
+  useEffect(() => {
+    // Function to check root [data-theme]
+    const checkRootTheme = () => {
+      const rootAttr = document.documentElement.getAttribute('data-theme');
+      if (rootAttr) {
+        setCurrentTheme(rootAttr);
+      }
+    };
+
+    checkRootTheme();
+
+    // Observe changes on root element when navbar toggles theme
+    const observer = new MutationObserver(checkRootTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Conditional check: true if theme is light, false if dark
+  const isLight = currentTheme === "light";
 
   const filteredProjects = activeCategory === "all" 
     ? projectsData 
     : projectsData.filter(p => p.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-8 font-sans">
+    <div className={`min-h-screen ${isLight ? "bg-[#ffffff] text-[#0f172a]" : "bg-black text-white"} py-12 px-4 sm:px-8 font-sans transition-colors duration-300`}>
       
       {/* Top Navigation with Back Link */}
       <nav className="max-w-6xl mx-auto mb-8 flex items-center justify-between">
@@ -151,10 +178,10 @@ export default function CreativeWorkPage() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="max-w-4xl mx-auto text-center mb-14"
       >
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 text-white leading-tight">
+        <h1 className={`sm:text-6xl font-extrabold tracking-tight mb-6 leading-tight ${isLight ? "text-[#0f172a]" : "text-white"}`}>
           Ideas We Turned Into <span className="text-[#0190f9]">Reality.</span>
         </h1>
-        <p className="text-zinc-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+        <p className={`max-w-2xl mx-auto text-base sm:text-lg leading-relaxed ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
           Step behind the scenes of our creative workshop—exploring bold interfaces, scalable architectures, and production-ready apps that redefine digital experiences.
         </p>
       </motion.div>
@@ -172,7 +199,9 @@ export default function CreativeWorkPage() {
               className={`relative flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-colors duration-300 ${
                 isActive 
                   ? "text-[#0190f9]" 
-                  : "text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-700 bg-transparent"
+                  : isLight 
+                    ? "text-zinc-600 hover:text-zinc-900 border border-zinc-300 hover:border-zinc-400 bg-transparent" 
+                    : "text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-700 bg-transparent"
               }`}
             >
               {isActive && (
@@ -185,7 +214,11 @@ export default function CreativeWorkPage() {
               <span className="relative z-10">{cat.label}</span>
               <motion.span 
                 animate={{ scale: isActive ? 1.1 : 1 }}
-                className={`relative z-10 text-[10px] px-1.5 py-0.5 rounded-full ${isActive ? "bg-[#0190f9] text-black font-extrabold" : "bg-zinc-900 text-zinc-400"}`}
+                className={`relative z-10 text-[10px] px-1.5 py-0.5 rounded-full ${
+                  isActive 
+                    ? "bg-[#0190f9] text-white font-extrabold" 
+                    : isLight ? "bg-zinc-200 text-zinc-600" : "bg-zinc-900 text-zinc-400"
+                }`}
               >
                 {cat.count}
               </motion.span>
@@ -213,10 +246,10 @@ export default function CreativeWorkPage() {
                 transition: { type: "spring", stiffness: 300, damping: 20 } 
               }}
               onClick={() => setSelectedProject(project)}
-              className="bg-zinc-950 rounded-2xl overflow-hidden border border-zinc-800 shadow-xl hover:border-[#0190f9]/50 cursor-pointer group flex flex-col justify-between"
+              className={`${isLight ? "bg-white border-zinc-200" : "bg-zinc-950 border-zinc-800"} rounded-2xl overflow-hidden border shadow-xl hover:border-[#0190f9]/50 cursor-pointer group flex flex-col justify-between`}
             >
               <div>
-                <div className="p-4 pb-3 flex items-center justify-between border-b border-zinc-900">
+                <div className={`p-4 pb-3 flex items-center justify-between border-b ${isLight ? "border-zinc-100" : "border-zinc-900"}`}>
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-[#0190f9] text-white">
                     {project.categoryLabel}
                   </span>
@@ -226,8 +259,8 @@ export default function CreativeWorkPage() {
                 </div>
 
                 {/* Card Thumbnail Window */}
-                <div className="relative w-full p-4 pb-2 bg-gradient-to-b from-zinc-900/40 to-transparent">
-                  <div className="rounded-lg overflow-hidden border border-zinc-800/80 bg-zinc-900 h-48 relative">
+                <div className={`relative w-full p-4 pb-2 bg-gradient-to-b ${isLight ? "from-zinc-100" : "from-zinc-900/40"} to-transparent`}>
+                  <div className={`rounded-lg overflow-hidden border ${isLight ? "border-zinc-200 bg-zinc-50" : "border-zinc-800/80 bg-zinc-900"} h-48 relative`}>
                     <motion.img 
                       src={project.thumbnail} 
                       alt={project.title}
@@ -241,10 +274,10 @@ export default function CreativeWorkPage() {
 
               <div className="p-4 pt-2 flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-bold text-white group-hover:text-[#0190f9] transition-colors">
+                  <h3 className={`text-lg font-bold group-hover:text-[#0190f9] transition-colors ${isLight ? "text-[#0f172a]" : "text-white"}`}>
                     {project.title}
                   </h3>
-                  <p className="text-xs text-zinc-400 mt-1 line-clamp-1">
+                  <p className={`text-xs mt-1 line-clamp-1 ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
                     {project.description}
                   </p>
                 </div>
@@ -252,7 +285,9 @@ export default function CreativeWorkPage() {
                 <motion.div 
                   whileHover={{ rotate: 45, scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className="w-9 h-9 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-[#0190f9] group-hover:bg-[#0190f9] group-hover:text-white transition-colors shadow-md shrink-0 ml-3"
+                  className={`w-9 h-9 rounded-full border flex items-center justify-center text-[#0190f9] group-hover:bg-[#0190f9] group-hover:text-white transition-colors shadow-md shrink-0 ml-3 ${
+                    isLight ? "bg-zinc-100 border-zinc-200" : "bg-zinc-900 border-zinc-800"
+                  }`}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 17L17 7M17 7H7M17 7V17" />
@@ -271,7 +306,7 @@ export default function CreativeWorkPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 md:p-10"
+            className={`fixed inset-0 z-50 ${isLight ? "bg-black/60" : "bg-black/90"} backdrop-blur-md flex items-center justify-center p-4 sm:p-6 md:p-10`}
             onClick={() => setSelectedProject(null)}
           >
             <motion.div 
@@ -279,7 +314,7 @@ export default function CreativeWorkPage() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.85, opacity: 0, y: 40 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-zinc-950 border border-zinc-800 w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]"
+              className={`${isLight ? "bg-white border-zinc-200" : "bg-zinc-950 border-zinc-800"} border w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]`}
               onClick={(e) => e.stopPropagation()}
             >
               <div className="absolute top-4 right-4 z-20">
@@ -287,7 +322,9 @@ export default function CreativeWorkPage() {
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setSelectedProject(null)}
-                  className="w-10 h-10 rounded-full bg-zinc-900 text-zinc-400 hover:text-white flex items-center justify-center transition-colors border border-zinc-800 shadow-lg"
+                  className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors border shadow-lg ${
+                    isLight ? "bg-zinc-100 text-zinc-600 hover:text-zinc-900 border-zinc-200" : "bg-zinc-900 text-zinc-400 hover:text-white border-zinc-800"
+                  }`}
                   aria-label="Close modal"
                 >
                   ✕
@@ -305,10 +342,10 @@ export default function CreativeWorkPage() {
                   <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#0190f9] text-white">
                     {selectedProject.categoryLabel}
                   </span>
-                  <h2 className="text-3xl font-extrabold text-white mt-3">
+                  <h2 className={`text-3xl font-extrabold mt-3 ${isLight ? "text-[#0f172a]" : "text-white"}`}>
                     {selectedProject.title}
                   </h2>
-                  <p className="text-zinc-400 mt-2">
+                  <p className={`mt-2 ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
                     {selectedProject.description}
                   </p>
                 </motion.div>
@@ -318,7 +355,7 @@ export default function CreativeWorkPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 mb-6 flex flex-col"
+                  className={`rounded-2xl overflow-hidden border ${isLight ? "border-zinc-200 bg-zinc-50" : "border-zinc-800 bg-zinc-900"} mb-6 flex flex-col`}
                 >
                   {selectedProject.images.map((imgSrc, index) => (
                     <img 
@@ -335,7 +372,9 @@ export default function CreativeWorkPage() {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => setSelectedProject(null)}
-                    className="px-6 py-3 rounded-2xl bg-zinc-900 text-zinc-300 font-semibold hover:bg-zinc-800 transition-colors border border-zinc-800"
+                    className={`px-6 py-3 rounded-2xl font-semibold transition-colors border ${
+                      isLight ? "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 border-zinc-200" : "bg-zinc-900 text-zinc-300 hover:bg-zinc-800 border-zinc-800"
+                    }`}
                   >
                     Close Preview
                   </motion.button>

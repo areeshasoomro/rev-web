@@ -53,6 +53,9 @@
   margin: 0 0 14px 0;
   letter-spacing: -0.02em;
 }
+[data-theme="light"] .sectionTitle {
+  color: #ffffff;
+}
 
 .blueText {
   color: var(--color-neon-blue);

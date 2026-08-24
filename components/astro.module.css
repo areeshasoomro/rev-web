@@ -525,7 +525,11 @@
   border-radius: 30px;
   font-weight: 500;
 }
+[data-theme="light"] .techPill {
 
+  color: #000000;
+
+} 
 
 
 
@@ -774,6 +778,11 @@
   color: #fff;
   font-weight: 600;
 }
+[data-theme="light"] .infoTitle {
+
+  color: #ffffff;
+
+} 
 
 
 
@@ -1109,6 +1118,11 @@
   /* Allows the text to take up remaining space */
   margin: 0;
 }
+[data-theme="light"] .quoteText {
+
+  color: #615b5b;
+
+} 
 
 .authorContainer {
   display: flex;
@@ -1123,6 +1137,15 @@
   font-weight: 800;
   letter-spacing: 0.05rem;
   text-align: center;
+}
+.brandAstro {
+  color: #ffffff;
+ 
+}
+[data-theme="light"] .brandAstro {
+
+  color: #000000;
+
 }
 
 .brandStudio {

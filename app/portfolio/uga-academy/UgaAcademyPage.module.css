@@ -16,9 +16,7 @@
   color: #0f172a;
 }
 
-[data-theme="light"] .ambientBackgroundMesh {
-  opacity: 0.15; /* Subtler mesh for light mode */
-}
+
 
 [data-theme="light"] .meshBlob1 {
   background: radial-gradient(circle, rgba(1, 144, 249, 0.12) 0%, transparent 70%);
