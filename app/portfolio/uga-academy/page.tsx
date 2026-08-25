@@ -471,12 +471,12 @@ const projectsData = [
     title: "Solvit Mobile App",
     category: "mobile-app",
     categoryLabel: "MOBILE APP",
-    thumbnail: "/solvit-app-show.png",
+    thumbnail: "/solvit-show-on.png",
     link: "#",
     description: "On-the-go educational tracking and mobile-optimized student workflows.",
     stats: "01 / 01",
     isFullPageUga: false,
-    images: ["/solvit-app-show.png"]
+    images: Array.from({ length: 2 }, (_, i) => `/solvit-${String(i + 1).padStart(2, '0')}.png`)
   },
   {
     id: "rebin-app",
