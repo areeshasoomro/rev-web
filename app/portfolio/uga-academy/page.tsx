@@ -483,12 +483,12 @@ const projectsData = [
     title: "Rebin App Design",
     category: "mobile-app",
     categoryLabel: "MOBILE APP",
-    thumbnail: "/rebin-app-on.png",
+    thumbnail: "/Rebin-app-on.png",
     link: "#",
     description: "The ultimate eco-reward App engineered to turn sustainable recycling into an engaging and rewarding experience.",
     stats: "01 / 01",
     isFullPageUga: false,
-    images: ["/rebin-app-on.png"]
+    images: ["/Rebin-app-on.png"]
   },
   {
     id: "revaya-pos-banner",
