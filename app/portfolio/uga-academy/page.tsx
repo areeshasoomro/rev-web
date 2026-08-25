@@ -435,7 +435,7 @@ const projectsData = [
     title: "Solvit Website",
     category: "website-design",
     categoryLabel: "WEBSITE DESIGN",
-    thumbnail: "/solv-01.png",
+    thumbnail: "/solvit-on.png",
     link: "#",
     description: "Comprehensive learning management platform and content workspace interface.",
     stats: "01 / 01",
@@ -459,7 +459,7 @@ const projectsData = [
     title: "Astro Website",
     category: "website-design",
     categoryLabel: "WEBSITE DESIGN",
-    thumbnail: "/ast-01.png",
+    thumbnail: "/astro-on.png",
     link: "#",
     description: "Sleek enterprise interface design with smooth styling and responsive views.",
     stats: "01 / 01",
@@ -495,7 +495,7 @@ const projectsData = [
     title: "Revaya POS Banner",
     category: "branding",
     categoryLabel: "BRANDING",
-    thumbnail: "/pos-banner.png",
+    thumbnail: "/pos-on.png",
     link: "#",
     description: "High-conversion promotional banner layout for Revaya POS branding.",
     stats: "01 / 01",
@@ -571,11 +571,11 @@ export default function CreativeWorkPage() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="max-w-4xl mx-auto text-center mb-14"
       >
-        <h1 className={`sm:text-6xl font-extrabold tracking-tight mb-6 leading-tight ${isLight ? "text-[#0f172a]" : "text-white"}`}>
-          Ideas We Turned Into <span className="text-[#0190f9]">Reality.</span>
-        </h1>
+        <h1 className={`text-3xl sm:text-6xl font-extrabold tracking-tight mb-6 leading-tight ${isLight ? "text-[#0f172a]" : "text-white"}`}>
+  Ideas We Turned Into <span className="text-[#0190f9]">Reality.</span>
+</h1>
         <p className={`max-w-2xl mx-auto text-base sm:text-lg leading-relaxed ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
-          Step behind the scenes of our creative workshop—exploring bold interfaces, scalable architectures, and production-ready apps that redefine digital experiences.
+          Step behind the scenes of our creative workshop exploring bold interfaces, scalable architectures, and production-ready apps that redefine digital experiences.
         </p>
       </motion.div>
 
