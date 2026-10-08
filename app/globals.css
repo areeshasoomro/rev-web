@@ -147,3 +147,14 @@ canvas.particle-bg {
   background: #0190F9;
   border-radius: 3px;
 }
+
+/* Fix Chatzy widget overlap when mobile keyboard opens */
+@media screen and (max-width: 768px) {
+  /* Target Chatzy iframe/container classes injected into the DOM */
+  #efbda2f2-bfa7-40a0-b6e8-c6cde28e296c, 
+  .chatzy_widget_script,
+  iframe[src*="chatzy"] {
+    max-height: 100dvh !important;
+    bottom: env(safe-area-inset-bottom, 0px) !important;
+  }
+}
